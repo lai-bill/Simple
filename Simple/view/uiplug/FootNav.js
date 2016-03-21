@@ -50,8 +50,9 @@ var FootNav = React.createClass({
 		var items = [];
 		var navigator = this.props.navigator;
 
-		this.props.navs.forEach(function(nav) {
+		this.props.navs.forEach(function(nav, index) {
 			items.push(<Item 
+							key={'nav' + index}
 							name={nav.routeName}
 							imgSrcHover={nav.imgSrcHover}
 							imgSrc={nav.imgSrc} 

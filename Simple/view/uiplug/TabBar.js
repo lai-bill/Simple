@@ -14,7 +14,7 @@ var {
 
 var TabBar = React.createClass({
 	render: function() {
-		var back = null, rightText = null;
+		var back = null, rightText = null, title = this.props.title;
 
 		if (this.props.navigator && this.props.navigator.getCurrentRoutes().length > 1) {
 			back = <Text style={styles.tabTxt}>{'<<返回'}</Text>;
@@ -25,6 +25,10 @@ var TabBar = React.createClass({
 			rightText = <Text style={[styles.tabTxt, {textAlign: 'right'}]}>{this.props.rightText}</Text>
 		}
 
+		if (!title) {
+			title = this.props.navigator.getCurrentRoutes()[this.props.navigator.getCurrentRoutes().length - 1].title;
+		}		
+
 		return (
 			<View style={[styles.TabLayout, {backgroundColor: this.props.bgColor}]}>
 				<TouchableOpacity 
@@ -32,7 +36,7 @@ var TabBar = React.createClass({
 					onPress={back ? this.urlBack : null}>
 					{back}
 				</TouchableOpacity>
-				<Text style={[styles.tabTxt, {flex: 5, textAlign: 'center'}]}>{this.props.title}</Text>
+				<Text style={[styles.tabTxt, {flex: 5, textAlign: 'center'}]}>{title}</Text>
 				<TouchableOpacity 
 					style={styles.labelTouch} 
 					onPress={rightText ? this.rightClick : null}>

@@ -10,6 +10,7 @@ var {
 var TabBar = require("./uiplug/TabBar");
 var FootNav = require("./uiplug/FootNav");
 var Home = require("./page/Home");
+var Notice = require("./page/Notice");
 
 function getFootVal() {
 	return [{
@@ -32,7 +33,12 @@ function getFootVal() {
 				route: {
 					title: '公告',
 					name: 'main1',
-					component: Nav1
+					component: React.createClass({
+									render: function() {
+										return <NavItem componentNav={<Notice navigator={this.props.navigator} />}  
+														navigator={this.props.navigator}/>
+									}
+								})
 				}
 			}, {
 				imgSrc: require('../public/img/settin.png'),
@@ -53,7 +59,7 @@ var NavItem = React.createClass({
 	render: function() {
 		return (
 			<View>
-				<TabBar title={this.props.title} bgColor="#3394FA" rightText="地图" navigator={this.props.navigator} />
+				<TabBar title={this.props.title} bgColor="#3394FA" navigator={this.props.navigator} />
 				<View style={{height: Dimensions.get('window').height - 66 - 64,}}>
 					{this.props.componentNav}
 				</View>

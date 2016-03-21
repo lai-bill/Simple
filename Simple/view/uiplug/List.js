@@ -14,7 +14,8 @@ var List = React.createClass({
 	getInitialState: function() {
 		return {
 			refreshing: false,
-			loadding: false
+			loadding: false,
+			success: false
 		}
 	},
 	render: function() {
@@ -34,7 +35,13 @@ var List = React.createClass({
 				</TouchableOpacity>
 			))
 		} else {
-			if (!this.state.loadding) {
+			if (this.state.success) {
+				items.push((
+				<TouchableOpacity style={styles.listItem}>
+					<Text style={{textAlign: 'center'}}>所有数据已加载完成！</Text>
+				</TouchableOpacity>
+				))
+			} else if (!this.state.loadding) {
 				items.push((
 					<TouchableOpacity style={styles.listItem} onPress={this._loadding}>
 						<Text style={{textAlign: 'center'}}>加载更多数据</Text>
@@ -67,13 +74,13 @@ var List = React.createClass({
 	},
 	_onRefresh: function() {
 		var that = this;
-
 		that.setState({
 			refreshing: true
 		});
-		that.props.refresh(function() {
+		that.props.refresh(function(code) {
 			that.setState({
-				refreshing: false
+				refreshing: false,
+				success: false
 			})
 		});
 	},
@@ -83,10 +90,10 @@ var List = React.createClass({
 		that.setState({
 			loadding: true
 		});
-		that.props.loadding(function() {
-			that.setState({
-				loadding: false
-			})
+		that.props.loadding(function(code) {
+			var state = {loadding: false};
+			if (code === 500) state.success = true; 
+			that.setState(state);
 		});
 	}
 });

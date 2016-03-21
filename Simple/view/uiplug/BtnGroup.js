@@ -10,16 +10,16 @@ var {
 var BtnGroup = React.createClass({
 	render: function() {
 		var btns = [];
-		this.props.btns.forEach(function(btn) {
+		this.props.btns.forEach(function(btn, index) {
 			var desc = null;
 			if (btn.desc) {
 				desc = <Text style={styles.btnText}>{btn.desc}</Text>;
 			}
 			btns.push((
-				<View style={[styles.btnLayout, {flex: 1}]}>
+				<View style={[styles.btnLayout, {flex: 1}]} key={btn.id + index}>
 					<TouchableOpacity 
 						style={[styles.btn, {backgroundColor: btn.color}]} 
-						onPress={() => btn.callback(btn.key)}>
+						onPress={() => btn.callback(btn.id)}>
 						<Text style={styles.btnTitle}>{btn.title}</Text>
 						{desc}
 					</TouchableOpacity>
@@ -29,7 +29,7 @@ var BtnGroup = React.createClass({
 
 		if (this.props.colum) {
 			for (var i = btns.length; i < this.props.colum; i++) 
-				btns.push(<View style={[styles.btnLayout, {flex: 1}]}></View>)
+				btns.push(<View style={[styles.btnLayout, {flex: 1}]} key={"colum" + i}></View>)
 		}
 
 		return (

@@ -11,38 +11,38 @@ var HomeInfo = require("./HomeInfo");
 var Home = React.createClass({
 	render: function() {
 		var group1 = [{
-						key: 'yanfa',
+						id: 'yanfa',
 						title: '研发',
 						color: '#0379FB',
 						desc: '框架研发',
 						callback: this.clickTab
 					}, {
-						key: 'BUyanfa',
+						id: 'BUyanfa',
 						title: '研发',
 						color: '#FCD333',
 						desc: 'BU研发',
 						callback: this.clickTab
 					}, {
-						key: 'cangp',
+						id: 'cangp',
 						title: '产品',
 						color: '#E7463E',
 						desc: '公告产品',
 						callback: this.clickTab
 					}, {
-						key: 'BUcanp',
+						id: 'BUcanp',
 						title: '产品',
 						color: '#57B648',
 						desc: 'BU产品',
 						callback: this.clickTab
 					}];
 		var group2 = [{
-						key: 'qimingx',
+						id: 'qimingx',
 						title: '产品',
 						color: '#ED6FBB',
 						desc: '启明星',
 						callback: this.clickTab
 					}, {
-						key: 'qimingx',
+						id: 'qimingx',
 						title: '项目',
 						color: '#E38830',
 						desc: '项目管理',
@@ -55,11 +55,14 @@ var Home = React.createClass({
 			</View>
 		);
 	},
-	clickTab: function(key) {
-		this.props.navigator.push({
-			title: '首页'+key,
+	clickTab: function(id) {
+		 this.props.navigator.push({
+			title: '首页'+id,
 			name: 'info',
-			component: HomeInfo
+			component: HomeInfo,
+			params: {
+				id: id
+			}
 		});
 	}
 });
