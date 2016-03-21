@@ -1,3 +1,7 @@
+/*
+ * TabBar: 顶部标题栏
+ * 	@height: 66
+ */
 'use strict';
 
 var React = require('react-native');
@@ -11,10 +15,15 @@ var {
 var TabBar = React.createClass({
 	render: function() {
 		var back = null, rightText = null;
-	 	back = <Text style={styles.tabTxt}>{'<<返回'}</Text>;
 
-		if (this.props.rightText) 
+		if (this.props.navigator && this.props.navigator.getCurrentRoutes().length > 1) {
+			back = <Text style={styles.tabTxt}>{'<<返回'}</Text>;
+		}
+
+
+		if (this.props.rightText) {
 			rightText = <Text style={[styles.tabTxt, {textAlign: 'right'}]}>{this.props.rightText}</Text>
+		}
 
 		return (
 			<View style={[styles.TabLayout, {backgroundColor: this.props.bgColor}]}>
