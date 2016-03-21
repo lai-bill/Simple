@@ -14,6 +14,11 @@ var {
 
 
 var Item = React.createClass({
+	getInitialState: function() {
+		return {
+			update: 0
+		}
+	},
 	render: function() {
 		var imgSrc = this.props.imgSrc;
 		var txtStyle = [styles.footItemTxt];
@@ -26,14 +31,17 @@ var Item = React.createClass({
 		}
 
 		return (
-			<TouchableOpacity onPress={this.itemClick} style={styles.footItem}>
+			<TouchableOpacity onPress={this.itemClick} style={styles.footItem} clickCount={this.state.update}>
 				<Image style={styles.footItemImg} source={imgSrc}/>
 				<Text style={txtStyle}>{this.props.content}</Text>
 			</TouchableOpacity>
 		);
 	},
 	itemClick: function() {
-		this.props.navigator.getCurrentRoutes().replace(route);
+		this.props.navigator.replace(this.props.route);
+		this.setState({
+			update: ++this.state.update
+		});
 	}
 })
 

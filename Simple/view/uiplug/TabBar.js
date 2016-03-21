@@ -42,7 +42,7 @@ var TabBar = React.createClass({
 		);
 	},
 	urlBack: function() {
-		this.props.navigator.getCurrentRoutes().pop();
+		this.props.navigator.pop();
 	}
 });
 

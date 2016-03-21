@@ -6,28 +6,33 @@ var {
 	Component,
 	View,
 	Text,
-	D
 } = React;
 var TabBar = require("./uiplug/TabBar");
 var FootNav = require("./uiplug/FootNav");
+var Home = require("./page/Home");
 
 function getFootVal() {
 	return [{
 				imgSrc: require('../public/img/phone.png'),
 				imgSrcHover: require('../public/img/phoneActive.png'),
 				content: '首页',
-				routeName: "main",
+				routeName: "home",
 				curColor: "#3394FA",
 				route: {
 					title: '首页',
-					name: 'main',
-					component: Main
+					name: 'home',
+					component: Nav1
 				}
 			}, {
 				imgSrc: require('../public/img/log.png'),
+				imgSrcHover: require('../public/img/logActive.png'),
 				content: '公告',
+				routeName: "main1",
+				curColor: "#3394FA",
 				route: {
-
+					title: '公告',
+					name: 'main1',
+					component: Nav1
 				}
 			}, {
 				imgSrc: require('../public/img/settin.png'),
@@ -44,23 +49,31 @@ function getFootVal() {
 			}];
 }
 
-
-
-
-var Main = React.createClass({
+var NavItem = React.createClass({
 	render: function() {
-
 		return (
 			<View>
-				<TabBar title="首页" bgColor="#3394FA" rightText="地图" />
-				<View style={{height: Dimensions.get('window').height - 66 - 64,}}><Text>123</Text></View>
+				<TabBar title={this.props.title} bgColor="#3394FA" rightText="地图" navigator={this.props.navigator} />
+				<View style={{height: Dimensions.get('window').height - 66 - 64,}}>
+					{this.props.componentNav}
+				</View>
 				<FootNav 
 					navigator={this.props.navigator}
 					navs={getFootVal()} />
 			</View>
 		);
 	}
+});
+
+
+var Nav1 = React.createClass({
+	render: function() {
+		return <NavItem title='首页' 
+						componentNav={<Home navigator={this.props.navigator} />}  
+						navigator={this.props.navigator}/>
+	}
 })
+
 
 var Router = React.createClass({
 	render: function() {
@@ -69,8 +82,8 @@ var Router = React.createClass({
 				style={{flex: 1}}
 				initialRoute={{
 					title: '首页',
-					name: 'main',
-					component: Main
+					name: 'home',
+					component: Nav1
 				}}
 				renderScene={ (route, navigator) => {
 					let Component = route.component;
