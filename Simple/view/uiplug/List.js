@@ -20,9 +20,9 @@ var List = React.createClass({
 	},
 	render: function() {
 		var items = [], info = "", onPress;
-		this.props.data.forEach(function(item) {
+		this.props.data.forEach(function(item, index) {
 			items.push((
-				<View style={styles.listItem}>
+				<View style={styles.listItem} key={'listItem' + index}>
 					{item}
 				</View>
 			))
@@ -44,7 +44,7 @@ var List = React.createClass({
 
 
 		items.push((
-			<TouchableOpacity style={styles.listItem} onPress={onPress}>
+			<TouchableOpacity style={styles.listItem} onPress={onPress} key={'listItemOper'}>
 				<Text style={{textAlign: 'center'}}>{info}</Text>
 			</TouchableOpacity>
 		))

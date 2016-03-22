@@ -58,7 +58,7 @@ var Notice = React.createClass({
 
 
 
-		fetch("https://raw.githubusercontent.com/lai-bill/Simple/master/Simple/data/HomeInfo")
+		fetch("https://raw.githubusercontent.com/lai-bill/Simple/master/Simple/data/NoticeInfo")
 			.then((response) => response.text())
 			.then((responseText) => {
 				var data = JSON.parse(responseText).content;
@@ -80,19 +80,18 @@ var Notice = React.createClass({
 			})
 	},
 	packageView: function(item) {
-		var index = item.name.substring(0, 1);
+		var index = item.author.substring(0, 1);
 		return (
-			<View style={styles.itemLayout} key={item.name}>
+			<View style={styles.itemLayout} key={item.author}>
 				<View style={styles.itemBtn}>
 					<Text style={styles.itemTitle}>{index}</Text>
 				</View>
 				<View style={styles.info}>
-					<Text style={styles.name}>{item.name}</Text>
-					<Text style={styles.desc}>{item.type + '-' + item.desc}</Text>
+					<Text style={styles.name}>{item.content}</Text>
+					<Text style={styles.desc}>{item.date}</Text>
 				</View>
 				<View style={styles.basic}>
-					<Text style={styles.pr}>{item.iphone}</Text>
-					<Text>{item.email}</Text>
+					<Text>{item.author}</Text>
 				</View>
 			</View>
 		);
