@@ -60,7 +60,7 @@ var NavItem = React.createClass({
 		return (
 			<View>
 				<TabBar title={this.props.title} bgColor="#3394FA" navigator={this.props.navigator} />
-				<View style={{height: Dimensions.get('window').height - 66 - 64,}}>
+				<View style={{height: Dimensions.get('window').height - 66 - 60,}}>
 					{this.props.componentNav}
 				</View>
 				<FootNav 

@@ -5,7 +5,8 @@ var Dimensions = require("Dimensions");
 var {
 	View,
 	Text,
-	StyleSheet
+	StyleSheet,
+	TouchableOpacity
 } = React;
 
 var List = require("../uiplug/List");
@@ -82,20 +83,24 @@ var Notice = React.createClass({
 	packageView: function(item) {
 		var index = item.author.substring(0, 1);
 		return (
-			<View style={styles.itemLayout} key={item.author}>
+			<TouchableOpacity style={styles.itemLayout} key={item.author} onPress={() => this.jumpInfo(item.id)}>
 				<View style={styles.itemBtn}>
 					<Text style={styles.itemTitle}>{index}</Text>
 				</View>
 				<View style={styles.info}>
-					<Text style={styles.name}>{item.content}</Text>
-					<Text style={styles.desc}>{item.date}</Text>
+					<Text style={styles.name} numberOfLines={2}>{item.content}</Text>
+					<Text style={styles.date}>{item.date}</Text>
 				</View>
 				<View style={styles.basic}>
-					<Text>{item.author}</Text>
+					<Text style={{textAlign: 'right'}}>{item.author}</Text>
 				</View>
-			</View>
+			</TouchableOpacity>
 		);
+	},
+	jumpInfo: function() {
+
 	}
+
 });
 
 
@@ -106,32 +111,31 @@ var styles = StyleSheet.create({
 	itemBtn: {
 		borderRadius: 5,
 		alignItems: 'center',
-		backgroundColor: '#45ACC6',
+		backgroundColor: '#57B648',
 		justifyContent: 'center',
-		flex: 1.5,
-		paddingTop: 10,
-		paddingBottom: 10,
+		flex: 1,
+		paddingTop: 12,
+		paddingBottom: 12,
 		marginRight: 15
 	},
 	itemTitle: {
-		fontSize: 30,
+		fontSize: 24,
 		color: '#ffffff'
 	},
 	info: {
-		flex: 3,
-		paddingTop: 10
+		flex: 4,
 	},
 	name: {
-		fontSize: 16,
-		color: '#4B4B4B'
+		fontSize: 14,
+		color: '#575757'
 	}, 
 	basic: {
-		flex: 2,
-		paddingTop: 10
+		flex: 1,
+		paddingTop: 10,
 	},
-	desc: {
-		fontSize: 14,
-		color: '#6E6D6D'
+	date: {
+		fontSize: 12,
+		color: '#D1D1D1'
 	},
 	pr: {
 		color: '#66C6FC',
