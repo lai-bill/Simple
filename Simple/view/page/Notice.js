@@ -6,10 +6,12 @@ var {
 	View,
 	Text,
 	StyleSheet,
-	TouchableOpacity
+	TouchableOpacity,
 } = React;
 
 var List = require("../uiplug/List");
+var NoticeInfo = require("./NoticeInfo");
+var TabBar = require("../uiplug/TabBar");
 
 var Notice = React.createClass({
 	getInitialState: function() {
@@ -19,7 +21,7 @@ var Notice = React.createClass({
 			pageCount: 5
 		}
 	},
-	componentWillMount: function() {
+	componentDidMount: function() {
 		this.requestData(this.state.page);
 	},
 	render: function() {
@@ -97,8 +99,16 @@ var Notice = React.createClass({
 			</TouchableOpacity>
 		);
 	},
-	jumpInfo: function() {
-
+	jumpInfo: function(id) {
+		this.props.navigator.push({
+			title: '消息详情',
+			component: NoticeInfo,
+			name: 'NoticeInfo',
+			params: {
+				id: id,
+				navigator: this.props.navigator
+			}
+		})
 	}
 
 });

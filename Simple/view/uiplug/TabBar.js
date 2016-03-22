@@ -13,21 +13,25 @@ var {
 } = React;
 
 var TabBar = React.createClass({
+	getInitialState: function() {
+		return {
+			rightText: this.props.rightText ? 
+							(<Text style={[styles.tabTxt, {textAlign: 'right'}]}>{this.props.rightText}</Text>) :
+							null,
+			title: this.props.title ?
+							this.props.title : 
+							this.props.navigator.getCurrentRoutes()[this.props.navigator.getCurrentRoutes().length - 1].title,
+			back: this.props.navigator ? this.props.navigator.getCurrentRoutes().length > 1: null
+		}
+	},
 	render: function() {
 		var back = null, rightText = null, title = this.props.title;
 
-		if (this.props.navigator && this.props.navigator.getCurrentRoutes().length > 1) {
-			back = <Text style={styles.tabTxt}>{'<<返回'}</Text>;
-		}
-
-
-		if (this.props.rightText) {
-			rightText = <Text style={[styles.tabTxt, {textAlign: 'right'}]}>{this.props.rightText}</Text>
-		}
-
-		if (!title) {
-			title = this.props.navigator.getCurrentRoutes()[this.props.navigator.getCurrentRoutes().length - 1].title;
-		}		
+		back = this.state.back ? (<Text style={styles.tabTxt}>{'<<返回'}</Text>) : back;
+		rightText = this.state.rightText ? 
+							(<Text style={[styles.tabTxt, {textAlign: 'right'}]}>{this.props.rightText}</Text>) : 
+							rightText;
+		title = title ? title : this.state.title;
 
 		return (
 			<View style={[styles.TabLayout, {backgroundColor: this.props.bgColor}]}>
@@ -39,7 +43,7 @@ var TabBar = React.createClass({
 				<Text style={[styles.tabTxt, {flex: 5, textAlign: 'center'}]}>{title}</Text>
 				<TouchableOpacity 
 					style={styles.labelTouch} 
-					onPress={rightText ? this.rightClick : null}>
+					onPress={rightText ? this.props.rightClick : null}>
 					{rightText}
 				</TouchableOpacity>
 			</View>

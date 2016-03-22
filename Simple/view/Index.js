@@ -11,6 +11,7 @@ var TabBar = require("./uiplug/TabBar");
 var FootNav = require("./uiplug/FootNav");
 var Home = require("./page/Home");
 var Notice = require("./page/Notice");
+var Manage = require("./page/Manage");
 
 function getFootVal() {
 	return [{
@@ -42,13 +43,23 @@ function getFootVal() {
 				}
 			}, {
 				imgSrc: require('../public/img/settin.png'),
+				imgSrcHover: require('../public/img/settinActive.png'),
 				content: '管理',
+				routeName: "main2",
+				curColor: "#3394FA",
 				route: {
-
+					title: '管理',
+					name: 'main2',
+					component: React.createClass({
+									render: function() {
+										return <NavItem componentNav={<Manage navigator={this.props.navigator} />}  
+														navigator={this.props.navigator}/>
+									}
+								})
 				}
 			}, {
 				imgSrc: require('../public/img/info.png'),
-				content: '管理',
+				content: '关于',
 				route: {
 
 				}

@@ -21,7 +21,7 @@ var HomeInfo = React.createClass({
 			pageCount: 5
 		}
 	},
-	componentWillMount: function() {
+	componentDidMount: function() {
 		this.requestData(this.state.page);
 	},
 	render: function() {
@@ -30,7 +30,7 @@ var HomeInfo = React.createClass({
 				<TabBar bgColor="#3394FA" navigator={this.props.navigator} />
 				<List 
 					data={this.state.data} 
-					height={Dimensions.get('window').height - 66 - 64} 
+					height={Dimensions.get('window').height - 66} 
 					refresh={this.refresh} 
 					loadding={this.loadding}/>
 			</View>

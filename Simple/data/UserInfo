@@ -1,0 +1,12 @@
+{
+	"code": 200,
+	"msg": "成功获取数据",
+	"content": [
+		{
+			"id": 1,
+			"name": "赖志彬",
+			"user": "laizhibin",
+			"pwd": "laizhibin066"
+		}
+	]
+}
