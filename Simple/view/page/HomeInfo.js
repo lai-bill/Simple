@@ -30,7 +30,7 @@ var HomeInfo = React.createClass({
 				<TabBar bgColor="#3394FA" navigator={this.props.navigator} />
 				<List 
 					data={this.state.data} 
-					height={Dimensions.get('window').height - 66} 
+					height={Dimensions.get('window').height - 66 - 64} 
 					refresh={this.refresh} 
 					loadding={this.loadding}/>
 			</View>
@@ -61,7 +61,7 @@ var HomeInfo = React.createClass({
 
 
 
-		fetch("http://192.168.174.1:8080/HomeInfo")
+		fetch("https://raw.githubusercontent.com/lai-bill/Simple/master/Simple/data/HomeInfo")
 			.then((response) => response.text())
 			.then((responseText) => {
 				var data = JSON.parse(responseText).content;

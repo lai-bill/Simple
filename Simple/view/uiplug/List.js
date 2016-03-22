@@ -19,7 +19,7 @@ var List = React.createClass({
 		}
 	},
 	render: function() {
-		var items = [];
+		var items = [], info = "", onPress;
 		this.props.data.forEach(function(item) {
 			items.push((
 				<View style={styles.listItem}>
@@ -28,34 +28,27 @@ var List = React.createClass({
 			))
 		});
 
-		if (items.length === 0) {
-			items.push((
-				<TouchableOpacity style={styles.listItem} onPress={this._onRefresh}>
-					<Text style={{textAlign: 'center'}}>暂无更多数据</Text>
-				</TouchableOpacity>
-			))
+		if (items.length === 0 && this.state.success) {
+			info = "暂无更多数据";
+			onPress = this._onRefresh;
+		} else if (items.length === 0 && !this.state.success) {
+			info = "加载中……";
+		} else if (this.state.success) {
+			info = "所有数据已加载完成！";
+		} else if (!this.state.loadding) {
+			info = "加载更多数据";
+			onPress = this._loadding;
 		} else {
-			if (this.state.success) {
-				items.push((
-				<TouchableOpacity style={styles.listItem}>
-					<Text style={{textAlign: 'center'}}>所有数据已加载完成！</Text>
-				</TouchableOpacity>
-				))
-			} else if (!this.state.loadding) {
-				items.push((
-					<TouchableOpacity style={styles.listItem} onPress={this._loadding}>
-						<Text style={{textAlign: 'center'}}>加载更多数据</Text>
-					</TouchableOpacity>
-				))
-			} else {
-				items.push((
-					<TouchableOpacity style={styles.listItem}>
-						<Text style={{textAlign: 'center'}}>加载中……</Text>
-					</TouchableOpacity>
-				))
-			}
+			info = "加载中……";
 		}
 
+
+		items.push((
+			<TouchableOpacity style={styles.listItem} onPress={onPress}>
+				<Text style={{textAlign: 'center'}}>{info}</Text>
+			</TouchableOpacity>
+		))
+		
 		return (
 			<ScrollView
 				style={{height: this.props.height}}
