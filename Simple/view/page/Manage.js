@@ -11,8 +11,8 @@ var {
 
 var List = require("../uiplug/List");
 var Dimensions = require("Dimensions");
-
 var UpdPwd = require("./UpdPwd");
+var Module_Alert = require("../uiplug/Module_Alert")
 
 var Manage = React.createClass({
 
@@ -46,15 +46,18 @@ var Manage = React.createClass({
 					click: this.jumpPage
 				}
 			],
-			views: []
+			views: [],
+			info: ""
 		}
 	},
 	render: function() {
 		return (
-			<View style={{backgroundColor: '#F5F5F5'}}>
-				<List 
-					data={this.state.views} 
-					height={Dimensions.get('window').height - 66 - 64} />
+			<View>
+				<View style={{backgroundColor: '#F5F5F5'}}>
+					<List 
+						data={this.state.views} 
+						height={Dimensions.get('window').height - 66 - 64} />
+				</View>
 			</View>
 		);
 	},
@@ -88,6 +91,8 @@ var Manage = React.createClass({
 		if (id === "upd_pwd") {
 			componentDOM = UpdPwd;
 			title = "修改密码";
+		} else {
+			alert({info: '暂未开放'});
 		}
 
 		this.props.navigator.push({

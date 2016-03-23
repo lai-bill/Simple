@@ -32,7 +32,8 @@ var UpdPwd = React.createClass({
 				  ],
 			views: [],
 			vals: {},
-			info: ""
+			info: "",
+			callfn: null
 		}
 	},
 	render: function() {
@@ -47,7 +48,7 @@ var UpdPwd = React.createClass({
 						data={this.state.views} 
 						height={Dimensions.get('window').height - 66}  />
 				</View>
-				<Module_Alert code={1} textColor={'#3394FA'} info={this.state.info} />
+				<Module_Alert code={1} textColor={'#3394FA'} info={this.state.info} quitCall={this.state.callfn} />
 			</View>
 		)
 	},
@@ -92,23 +93,33 @@ var UpdPwd = React.createClass({
 			});
 		}
 
-		fetch("https://raw.githubusercontent.com/lai-bill/Simple/master/Simple/data/HomeInfo")
+		fetch("https://raw.githubusercontent.com/lai-bill/Simple/master/Simple/data/UserInfo")
 			.then((response) => response.text())
 			.then((responseText) => {
-				var datas = JSON.parse(responseText);
+				var datas = JSON.parse(responseText).content;
 				var info = "原密码输入不正确！";
+				var callfn = null;
 				datas.forEach(function(user) {
 					if (user.id == 1 && user.pwd === that.state.vals.used_pwd) 
 						quest = true;
 				})
-				if (quest) info = "密码修改成功";
+
+				if (quest) {
+					info = "密码修改成功";
+					callfn = that.backfn
+				}
 
 				that.setState({
-					info: info
+					info: info,
+					callfn: callfn
 				});
 			});
 
 		this.state.vals.used_pwd
+	},
+	backfn: function(bool) {
+		if (!bool) return;
+		this.props.navigator.pop();
 	}
 })
 

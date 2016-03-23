@@ -29,7 +29,7 @@ var Notice = React.createClass({
 			<View>
 				<List 
 					data={this.state.data} 
-					height={Dimensions.get('window').height - 66} 
+					height={Dimensions.get('window').height - 66 - 60} 
 					refresh={this.refresh} 
 					loadding={this.loadding}/>
 			</View>

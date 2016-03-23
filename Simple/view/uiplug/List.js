@@ -57,7 +57,6 @@ var List = React.createClass({
 			} else {
 				info = "加载中……";
 			}
-
 			items.push((
 				<TouchableOpacity style={styles.listItem} onPress={onPress} key={'listItemOper'}>
 					<Text style={{textAlign: 'center'}}>{info}</Text>
@@ -67,7 +66,6 @@ var List = React.createClass({
 		}
 
 
-		
 		return (
 			<ScrollView
 				style={{height: this.props.height}}
