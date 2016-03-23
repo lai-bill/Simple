@@ -12,6 +12,7 @@ var FootNav = require("./uiplug/FootNav");
 var Home = require("./page/Home");
 var Notice = require("./page/Notice");
 var Manage = require("./page/Manage");
+var About = require("./page/About");
 
 function getFootVal() {
 	return [{
@@ -59,9 +60,19 @@ function getFootVal() {
 				}
 			}, {
 				imgSrc: require('../public/img/info.png'),
+				imgSrcHover: require('../public/img/infoActive.png'),
+				routeName: "test",
 				content: '关于',
+				curColor: "#3394FA",
 				route: {
-
+					title: '关于',
+					name: 'test',
+					component: React.createClass({
+									render: function() {
+										return <NavItem componentNav={<About navigator={this.props.navigator} />}  
+														navigator={this.props.navigator}/>
+									}
+								})
 				}
 			}];
 }
